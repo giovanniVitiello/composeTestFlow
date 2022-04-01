@@ -1,5 +1,6 @@
-package com.example.composeflowtest.model
+package com.example.composeflowtest.data.remote.dto
 
+import com.example.composeflowtest.domain.model.BeerDomain
 import com.google.gson.annotations.SerializedName
 
 class BeerResponse(

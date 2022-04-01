@@ -1,4 +1,4 @@
-package com.example.composeflowtest.model
+package com.example.composeflowtest.domain.model
 
 class BeerDomain(
     val name: String?,

@@ -1,8 +1,6 @@
-package com.example.composeflowtest
+package com.example.composeflowtest.presentation
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -18,27 +16,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
-import com.example.composeflowtest.model.BeerDomain
-import com.example.composeflowtest.ui.theme.ComposeFlowTestTheme
+import com.example.composeflowtest.common.Resource
+import com.example.composeflowtest.domain.model.BeerDomain
+import com.example.composeflowtest.presentation.ui.theme.ComposeFlowTestTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val viewModel = viewModel<MainViewModel>()
-            val listOfBeers = viewModel.stateFlow.collectAsState(Resource(Status.EMPTY, null, ""))
-            viewModel.testApi()
             ComposeFlowTestTheme {
                 // A surface container using the 'background' color from the them
                 Box(modifier = Modifier.fillMaxSize()) {
-                    when(listOfBeers.value.status) {
-                        Status.SUCCESS -> listOfBeers.value.data?.let { CreateLazyList(it) }
-                        Status.ERROR -> Toast.makeText(this@MainActivity, listOfBeers.value.message, Toast.LENGTH_LONG).show()
-                        Status.LOADING -> Toast.makeText(this@MainActivity, "progressBar", Toast.LENGTH_LONG).show()
-                        Status.EMPTY -> Log.i("","")
-                    }
+                    CreateLazyList()
                 }
             }
         }
@@ -46,9 +39,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CreateLazyList(listOfBeers: List<BeerDomain>) {
+fun CreateLazyList(viewModel: MainViewModel = hiltViewModel()) {
+    val state = viewModel.stateFlow.collectAsState(Resource.Empty())
     LazyColumn {
-        items(items = listOfBeers) {
+        items(items = state.value.data ?: emptyList()) {
             Item(beer = it)
         }
     }

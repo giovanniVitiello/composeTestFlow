@@ -1,4 +1,4 @@
-package com.example.composeflowtest.ui.theme
+package com.example.composeflowtest.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
