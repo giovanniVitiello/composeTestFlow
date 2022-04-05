@@ -40,9 +40,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CreateLazyList(viewModel: MainViewModel = hiltViewModel()) {
-    val state = viewModel.stateFlow.collectAsState(Resource.Empty())
+    val state = viewModel.stateFlow.collectAsState()
     LazyColumn {
-        items(items = state.value.data ?: emptyList()) {
+        items(items = state.value.beers) {
             Item(beer = it)
         }
     }
@@ -104,6 +104,17 @@ fun Item(beer: BeerDomain) {
 @Composable
 fun DefaultPreview() {
     ComposeFlowTestTheme {
-//        Item("Android", 3)
+        Item(
+            beer = BeerDomain(
+                "birra ceres",
+                null,
+                "val description: String?",
+                "8",
+                "7.5",
+                null,
+                null,
+                null
+            )
+        )
     }
 }

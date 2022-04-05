@@ -16,7 +16,7 @@ class MainViewModel @Inject constructor(
     private val repository: AppRepository
 ) : ViewModel() {
 
-    private val _stateFlow = MutableStateFlow<Resource<List<BeerDomain>>>(Resource.Empty())
+    private val _stateFlow = MutableStateFlow(BeerListState())
     var stateFlow = _stateFlow.asStateFlow()
 
     init {
@@ -24,20 +24,19 @@ class MainViewModel @Inject constructor(
     }
 
     private fun testApi() {
-        _stateFlow.value = Resource.Loading()
+        _stateFlow.value = BeerListState(isLoading = true)
         viewModelScope.launch {
             when (val result = repository.getBeerListCoroutines()) {
                 is Resource.Success -> {
-                    _stateFlow.value = result
+                    _stateFlow.value = BeerListState(beers = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _stateFlow.value = Resource.Error("An unexpected error occured")
+                    _stateFlow.value = BeerListState(error = "An unexpected error occured")
 
                 }
                 is Resource.Loading -> {
-                    _stateFlow.value = Resource.Loading(null)
+                    _stateFlow.value = BeerListState(isLoading = true)
                 }
-                is Resource.Empty -> _stateFlow.value = Resource.Empty(null)
             }
         }
     }
