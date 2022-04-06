@@ -1,9 +1,8 @@
-package com.example.composeflowtest.presentation
+package com.example.composeflowtest.presentation.beerlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.composeflowtest.common.Resource
-import com.example.composeflowtest.domain.model.BeerDomain
 import com.example.composeflowtest.domain.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

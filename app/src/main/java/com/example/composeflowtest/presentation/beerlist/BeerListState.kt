@@ -1,4 +1,4 @@
-package com.example.composeflowtest.presentation
+package com.example.composeflowtest.presentation.beerlist
 
 import com.example.composeflowtest.domain.model.BeerDomain
 
