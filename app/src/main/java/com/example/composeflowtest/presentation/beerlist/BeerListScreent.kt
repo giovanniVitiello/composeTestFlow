@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -29,11 +30,13 @@ fun BeerListScreen(
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val state = viewModel.stateFlow.collectAsState()
-    LazyColumn {
-        items(items = state.value.beers) { beer ->
-            Item(beer = beer, onClick = {
-                navigator.navigate(BeerDetailScreenDestination(beer = beer))
-            })
+    Surface(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
+        LazyColumn {
+            items(items = state.value.beers) { beer ->
+                Item(beer = beer, onClick = {
+                    navigator.navigate(BeerDetailScreenDestination(beer = beer))
+                })
+            }
         }
     }
 }

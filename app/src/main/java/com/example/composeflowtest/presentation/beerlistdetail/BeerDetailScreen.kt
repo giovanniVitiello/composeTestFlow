@@ -9,7 +9,7 @@ import com.example.composeflowtest.domain.model.BeerDomain
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@Destination()
+@Destination
 @Composable
 fun BeerDetailScreen(
     navigator: DestinationsNavigator,
