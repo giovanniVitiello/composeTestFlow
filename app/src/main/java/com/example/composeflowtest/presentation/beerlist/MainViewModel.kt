@@ -31,7 +31,6 @@ class MainViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _stateFlow.value = BeerListState(error = "An unexpected error occured")
-
                 }
                 is Resource.Loading -> {
                     _stateFlow.value = BeerListState(isLoading = true)

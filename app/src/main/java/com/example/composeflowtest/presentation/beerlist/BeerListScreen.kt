@@ -1,6 +1,5 @@
 package com.example.composeflowtest.presentation.beerlist
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.rememberAsyncImagePainter
 import com.example.composeflowtest.domain.model.BeerDomain
 import com.example.composeflowtest.presentation.destinations.BeerDetailScreenDestination
 import com.example.composeflowtest.presentation.ui.theme.ComposeFlowTestTheme
